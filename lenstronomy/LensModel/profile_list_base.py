@@ -28,6 +28,7 @@ _SUPPORTED_MODELS = [
     "CURVED_ARC_SPT",
     "CURVED_ARC_TAN_DIFF",
     "DIPOLE",
+    "DPIE_NIE",
     "DOUBLE_CHAMELEON",
     "EPL",
     "EPL_BOXYDISKY_ELL",
@@ -433,6 +434,10 @@ def lens_class(
         from lenstronomy.LensModel.Profiles.dipole import Dipole
 
         return Dipole(**profile_kwargs)
+    elif lens_type == "DPIE_NIE":
+        from lenstronomy.LensModel.Profiles.dpie_nie import DPIENIE
+
+        return DPIENIE(**profile_kwargs)
     elif lens_type == "DOUBLE_CHAMELEON":
         from lenstronomy.LensModel.Profiles.chameleon import DoubleChameleon
 
