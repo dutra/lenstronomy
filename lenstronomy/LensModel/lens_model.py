@@ -532,6 +532,17 @@ class LensModel(object):
         det_A = (1 - f_xx) * (1 - f_yy) - f_xy * f_yx
         return 1.0 / det_A  # attention, if dividing by zero
 
+    def mass_3d(self, r, kwargs, bool_list=None):
+        """Mass enclosed within 3d radius r.
+
+        :param r: 3d radius
+        :param kwargs: list of keyword arguments of lens model parameters matching the
+            lens model classes
+        :param bool_list: list of booleans selecting which lens profiles are evaluated
+        :return: 3d enclosed lens mass in angular lensing units
+        """
+        return self.lens_model.mass_3d(r, kwargs, bool_list=bool_list)
+
     def flexion(self, x, y, kwargs, k=None, diff=0.0001, hessian_diff=False):
         """Third derivatives (flexion)
 

@@ -65,6 +65,21 @@ class DPIENIE(LensProfileBase):
             f_yy_inner - f_yy_outer,
         )
 
+    def mass_3d_lens(self, r, sigma0, Ra, Rs, e1=0, e2=0, center_x=0, center_y=0):
+        """Mass enclosed within 3d radius r.
+
+        This uses the same spherical approximation as NIE.mass_3d_lens,
+        treating the dPIE as the difference of two NIE profiles.
+        """
+        theta_E, Ra, Rs = self._param_convert(sigma0, Ra, Rs)
+        m_inner = self._nie_inner.mass_3d_lens(
+            r, theta_E, e1, e2, Ra, center_x, center_y
+        )
+        m_outer = self._nie_outer.mass_3d_lens(
+            r, theta_E, e1, e2, Rs, center_x, center_y
+        )
+        return m_inner - m_outer
+
     @staticmethod
     def _param_convert(sigma0, Ra, Rs):
         Ra, Rs = DPIENIE._sort_ra_rs(Ra, Rs)
